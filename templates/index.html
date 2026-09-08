@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AI Document & Database Agent</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="header">
+
+        <div class="logo">
+            🤖
+        </div>
+
+        <h1>
+            AI Document & Database Agent
+        </h1>
+
+        <p>
+            Analyze documents and interact with your database using AI
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MODE SELECTION -->
+    <!-- ================================================= -->
+
+    <div class="mode-container">
+
+        <button
+            id="documentModeBtn"
+            class="mode-button active"
+        >
+
+            <span class="mode-icon">
+                📄
+            </span>
+
+            <span>
+                Document AI
+            </span>
+
+        </button>
+
+
+        <button
+            id="databaseModeBtn"
+            class="mode-button"
+        >
+
+            <span class="mode-icon">
+                🗄️
+            </span>
+
+            <span>
+                Database AI
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- DOCUMENT SECTION -->
+    <!-- ================================================= -->
+
+    <div
+        id="documentSection"
+        class="mode-section"
+    >
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">
+                    1
+                </span>
+
+                <div>
+
+                    <h2>
+                        Upload your document
+                    </h2>
+
+                    <p>
+                        Upload a PDF and let AI analyze it.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Upload box -->
+
+            <div
+                class="upload-box"
+                id="uploadBox"
+            >
+
+                <div class="upload-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Upload a PDF document
+                </h3>
+
+                <p>
+                    Drag and drop your file here
+                </p>
+
+                <p class="upload-subtext">
+                    Supported format: PDF
+                </p>
+
+
+                <label class="browse-button">
+
+                    Browse File
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf"
+                        hidden
+                    >
+
+                </label>
+
+            </div>
+
+
+            <!-- Selected file -->
+
+            <div
+                class="selected-file"
+                id="selectedFile"
+                style="display: none;"
+            >
+
+                <div class="file-icon">
+                    📄
+                </div>
+
+                <div class="file-details">
+
+                    <span class="file-label">
+                        Selected document
+                    </span>
+
+                    <span
+                        id="fileName"
+                        class="file-name"
+                    ></span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="removeFile"
+                    class="remove-button"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Document action -->
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">
+                    2
+                </span>
+
+                <div>
+
+                    <h2>
+                        Analyze document
+                    </h2>
+
+                    <p>
+                        AI will automatically summarize the uploaded document.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="analyzeDocumentBtn"
+                class="primary-button"
+                disabled
+            >
+
+                <span>
+                    ✨
+                </span>
+
+                Analyze Document
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- DATABASE SECTION -->
+    <!-- ================================================= -->
+
+    <div
+        id="databaseSection"
+        class="mode-section"
+        style="display: none;"
+    >
+
+        <!-- Database selection -->
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">
+                    1
+                </span>
+
+                <div>
+
+                    <h2>
+                        Select your database
+                    </h2>
+
+                    <p>
+                        Choose the MySQL database you want to query.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="database-select-container">
+
+                <label for="databaseSelect">
+                    Database
+                </label>
+
+                <div class="select-wrapper">
+
+                    <select
+                        id="databaseSelect"
+                    >
+
+                        <option value="">
+                            Loading databases...
+                        </option>
+
+                    </select>
+
+                    <span class="select-arrow">
+                        ▼
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Database question -->
+
+        <div class="section">
+
+            <div class="section-heading">
+
+                <span class="step-number">
+                    2
+                </span>
+
+                <div>
+
+                    <h2>
+                        Ask your database
+                    </h2>
+
+                    <p>
+                        Ask questions in natural language. AI will generate and execute the SQL.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="question-container">
+
+                <textarea
+                    id="databaseQuestion"
+                    placeholder="Example: How many students are there?"
+                    rows="5"
+                ></textarea>
+
+
+                <div class="question-examples">
+
+                    <button
+                        class="question-example"
+                        data-question="How many students are there?"
+                    >
+                        👥 Count students
+                    </button>
+
+
+                    <button
+                        class="question-example"
+                        data-question="Show me all students."
+                    >
+                        📋 Show students
+                    </button>
+
+
+                    <button
+                        class="question-example"
+                        data-question="Show me the first 5 students."
+                    >
+                        🔎 Sample data
+                    </button>
+
+
+                    <button
+                        class="question-example"
+                        data-question="What tables are available in this database?"
+                    >
+                        📊 Tables
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ask database button -->
+
+        <div class="section">
+
+            <button
+                id="askDatabaseBtn"
+                class="primary-button"
+                disabled
+            >
+
+                <span>
+                    🤖
+                </span>
+
+                Ask Database
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- LOADING -->
+    <!-- ================================================= -->
+
+    <div
+        id="loadingSection"
+        class="loading"
+        style="display: none;"
+    >
+
+        <div class="spinner"></div>
+
+        <h3 id="loadingTitle">
+            AI is working...
+        </h3>
+
+        <p id="loadingMessage">
+            Please wait while your request is being processed.
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ERROR -->
+    <!-- ================================================= -->
+
+    <div
+        id="errorBox"
+        class="error"
+        style="display: none;"
+    >
+
+        <span class="error-icon">
+            ⚠️
+        </span>
+
+        <span id="errorMessage"></span>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- RESULT -->
+    <!-- ================================================= -->
+
+    <div
+        id="resultSection"
+        class="result-section"
+        style="display: none;"
+    >
+
+        <div class="result-header">
+
+            <div>
+
+                <span class="result-label">
+                    AI RESPONSE
+                </span>
+
+                <h2>
+                    Answer
+                </h2>
+
+            </div>
+
+
+            <button
+                id="copyBtn"
+                class="copy-button"
+            >
+                📋 Copy
+            </button>
+
+        </div>
+
+
+        <!-- Database information -->
+
+        <div
+            id="databaseInfo"
+            class="database-info"
+            style="display: none;"
+        >
+
+            <div>
+
+                <span>
+                    Database
+                </span>
+
+                <strong id="resultDatabase">
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Result content -->
+
+        <div
+            id="result"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
+
+    <div class="footer">
+
+        <span>
+            Powered by
+        </span>
+
+        <strong>
+            Gemini + MCP
+        </strong>
+
+    </div> 
+    <button type="button" onclick="window.location.href='/'">
+        Clear
+    </button>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
