@@ -193,19 +193,7 @@ GEMINI_API_KEY=your_api_key_here
 
 The application reads the API key from the environment variables.
 
-### Important
 
-Do **not** upload your `.env` file to GitHub.
-
-Add the following to `.gitignore`:
-
-```gitignore
-.env
-venv/
-__pycache__/
-uploads/
-*.pyc
-```
 
 ## Running the Application
 
